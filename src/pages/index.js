@@ -49,10 +49,10 @@ const Intro = () => <motion.div
   </div>
 </motion.div>;
 
-const setFormSteps = ({fullName, phone, user}) => ([
+const setFormSteps = ({fullName, phone}) => ([
   {
     type: 'radio',
-    name: 'feeling',
+    name: 'sensacion',
     title: '¿Cómo te sientes hoy con tu sonrisa?',
     inputOptions: {required: 'Selecciona una por favor'},
     options: [
@@ -77,7 +77,7 @@ const setFormSteps = ({fullName, phone, user}) => ([
   },
   {
     type: 'radio',
-    name: 'fix',
+    name: 'mejora',
     title: '¿Qué te gustaría mejorar?',
     inputOptions: {required: 'Selecciona una por favor'},
     options: [
@@ -96,6 +96,31 @@ const setFormSteps = ({fullName, phone, user}) => ([
       {
         value: 'no-sabe',
         label: 'No lo sé, quiero ver si hay algo',
+      },
+    ],
+    cols: 1,
+  },
+  {
+    type: 'radio',
+    name: 'interes',
+    title: '¿Por qué te interesa mejorar tu sonrisa hoy?',
+    inputOptions: {required: 'Selecciona una por favor'},
+    options: [
+      {
+        value: 'seguridad',
+        label: 'Para sentirme más seguro',
+      },
+      {
+        value: 'evento-importante',
+        label: 'Se viene un evento importante',
+      },
+      {
+        value: 'ya-es-consciente',
+        label: 'Porque nunca lo he hecho y ya quiero atenderme',
+      },
+      {
+        value: 'cuidado',
+        label: 'Porque me gusta cuidarme',
       },
     ],
     cols: 1,
@@ -128,8 +153,14 @@ const setFormSteps = ({fullName, phone, user}) => ([
     ),
   },
   {
+    type: 'text',
+    name: 'edad',
+    title: '¿Cuántos años tienes?',
+    inputOptions: {required: 'Compártenos tu edad'},
+  },
+  {
     type: 'radio',
-    name: 'frecuency',
+    name: 'frecuencia',
     title: '¿Vas al dentista con frecuencia?',
     inputOptions: {required: 'Selecciona una por favor'},
     options: [
@@ -153,50 +184,11 @@ const setFormSteps = ({fullName, phone, user}) => ([
     cols: 1,
   },
   {
-    type: 'radio',
-    name: 'goal',
-    title: '¿Por qué te interesa mejorar tu sonrisa hoy?',
+    type: 'textarea',
+    name: 'creencia',
+    title: 'Cuéntame qué quieres lograr con este cambio o qué crees que necesitas.',
     inputOptions: {required: 'Selecciona una por favor'},
-    options: [
-      {
-        value: 'seguridad',
-        label: 'Para sentirme más seguro',
-      },
-      {
-        value: 'evento-importante',
-        label: 'Se viene un evento importante',
-      },
-      {
-        value: 'ya-es-consciente',
-        label: 'Porque nunca lo he hecho y ya quiero atenderme',
-      },
-      {
-        value: 'cuidado',
-        label: 'Porque me gusta cuidarme',
-      },
-    ],
-    cols: 1,
-  },
-  {
-    type: 'radio',
-    name: 'valoracion',
-    title: '¿Has recibido una valoración de tratamiento antes?',
-    inputOptions: {required: 'Selecciona una por favor'},
-    options: [
-      {
-        value: 'con-valoracion-previa',
-        label: 'Sí pero no me convenció',
-      },
-      {
-        value: 'comparando-opciones',
-        label: 'Sí, estoy comparando',
-      },
-      {
-        value: 'primera-vez',
-        label: 'No, apenas estoy buscando',
-      },
-    ],
-    cols: 1,
+    cols: 4,
   },
   {
     type: 'checkpoint',
@@ -223,7 +215,28 @@ const setFormSteps = ({fullName, phone, user}) => ([
   },
   {
     type: 'radio',
-    name: 'immediacy',
+    name: 'valoracion',
+    title: '¿Has recibido una valoración de tratamiento antes?',
+    inputOptions: {required: 'Selecciona una por favor'},
+    options: [
+      {
+        value: 'con-valoracion-previa',
+        label: 'Sí pero no me convenció',
+      },
+      {
+        value: 'comparando-opciones',
+        label: 'Sí, estoy comparando',
+      },
+      {
+        value: 'primera-vez',
+        label: 'No, apenas estoy buscando',
+      },
+    ],
+    cols: 1,
+  },
+  {
+    type: 'radio',
+    name: 'inmediatez',
     title: '¿Cuándo te gustaría comenzar tu tratamiento?',
     inputOptions: {required: 'Selecciona una por favor'},
     options: [
@@ -245,12 +258,6 @@ const setFormSteps = ({fullName, phone, user}) => ([
       },
     ],
     cols: 1,
-  },
-  {
-    type: 'text',
-    name: 'age',
-    title: 'Por último, qué edad tienes?',
-    inputOptions: {required: 'Compártenos tu edad'},
   },
   {
     type: 'checkpoint',

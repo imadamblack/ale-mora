@@ -60,8 +60,8 @@ export default function Results({lead}) {
         title="Pacientes que ya confiaron en nosotros."
         background={iTestimonios}
       />
-      <section className="container my-20">
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-20">
+      <section className="reading-container my-20">
+        <div className="w-full mb-20">
           <div className="relative">
             <div className="relative w-full aspect-[1/.88] overflow-hidden">
               <Image src="/survey/Testimonios_01.png" layout="fill" objectFit="cover" objectPosition="top"/>
