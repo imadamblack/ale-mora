@@ -57,19 +57,19 @@ const setFormSteps = ({fullName, phone}) => ([
     inputOptions: {required: 'Selecciona una por favor'},
     options: [
       {
-        value: 'mejora',
+        value: 'puede-mejorar',
         label: 'Me gusta pero creo que podría mejorar',
       },
       {
-        value: 'inconsciente',
+        value: 'sin-idea',
         label: 'No tengo idea si necesito algo',
       },
       {
-        value: 'inseguro',
+        value: 'inseguridad',
         label: 'A veces me siento inseguro',
       },
       {
-        value: 'cambio',
+        value: 'quiere-cambio',
         label: 'Me siento bien, pero quiero un cambio',
       },
     ],
@@ -107,7 +107,7 @@ const setFormSteps = ({fullName, phone}) => ([
     inputOptions: {required: 'Selecciona una por favor'},
     options: [
       {
-        value: 'seguridad',
+        value: 'mayor-seguridad',
         label: 'Para sentirme más seguro',
       },
       {
