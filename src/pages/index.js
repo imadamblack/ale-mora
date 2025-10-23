@@ -2,8 +2,7 @@
 import { useForm, FormProvider } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { setCookie, getCookie } from 'cookies-next';
-import { info } from '../../info';
+import { setCookie } from 'cookies-next';
 import StepRenderer from '../components/form/stepRenderer';
 import fbEvent from '../services/fbEvents';
 import Image from 'next/image';
@@ -290,7 +289,7 @@ const setFormSteps = ({fullName, phone}) => ([
   {
     type: 'opt-in',
     title: 'Ok, estamos listos para trabajar en tu nueva sonrisa',
-    description: 'Compárteme tu nombre y WhatsApp para programar tu valoración presencial.',
+    description: '<span class="font-semibold">Tu estudio clínico en una sola visita:</span> <br/>- radiografías <br/>- escaneo digital <br/>- interconsulta con especialistas <br/>- diagnóstico apoyado por IA<br/>- limpieza <br/>Recibe tu plan de tratamiento, ruta clínica y cotización el mismo día.<br/><b>Agenda tu consulta integral $2,000 MXN</b> <br/><span class="-ft-1">Pagas hasta el día de tu consulta.</span>',
     fields: [
       {
         type: 'text',
@@ -393,7 +392,10 @@ export default function Survey({lead, utm}) {
 
       const payload = {...lead, ...data, ...utm};
 
-      const res = await fetch(info.surveyWebhook, {
+      const url = '';
+      // const url = info.surveyWebhook;
+
+      const res = await fetch(url, {
         method: 'POST',
         body: JSON.stringify(payload),
         headers: {
@@ -502,42 +504,39 @@ export default function Survey({lead, utm}) {
 }
 
 export async function getServerSideProps(ctx) {
-  const {req, res} = ctx;
-  const leadCookie = getCookie('lead', {req, res}) || '{}';
-  const leadUtmCookie = getCookie('lead_utm', {req, res}) || '{}';
-  const _fbc = getCookie('_fbc', {req, res}) || '';
-  const _fbp = getCookie('_fbp', {req, res}) || '';
+  const {req} = ctx;
+  const cookiesHeader = req.headers.cookie || '';
 
-  const lead = JSON.parse(leadCookie);
-  const leadUtm = JSON.parse(leadUtmCookie);
+  const keys = ['utm', '_fbc', '_fbp', 'lead'];
+  const cookies = {};
 
-  if (!lead || lead === 'null' || Object.keys(lead).length === 0) {
-    return {
-      props: {
-        lead: {
-          fullName: '',
-          phone: '',
-          whatsapp: '',
-          sheetRow: '',
-          _fbc,
-          _fbp,
-        },
-        utm: leadUtm,
-      },
-    };
+  for (const key of keys) {
+    const raw = cookiesHeader
+      .split('; ')
+      .find(c => c.startsWith(`${key}=`))
+      ?.split('=')[1];
+
+    if (!raw) continue;
+
+    try {
+      const clean = raw.startsWith('j%3A') ? raw.slice(4) : raw;
+      cookies[key] = JSON.parse(decodeURIComponent(clean));
+    } catch {
+      cookies[key] = decodeURIComponent(raw);
+    }
   }
+
+  const {lead, utm} = cookies;
 
   return {
     props: {
       lead: {
-        fullName: lead.fullName,
-        phone: lead.phone,
-        whatsapp: lead.whatsapp,
-        sheetRow: lead.sheetRow || '',
-        _fbc,
-        _fbp,
+        fullName: lead?.fullName ?? '',
+        phone: lead?.phone ?? '',
+        whatsapp: lead?.whatsapp ?? '',
+        sheetRow: lead?.sheetRow ?? '',
       },
-      utm: leadUtm,
+      utm: utm ?? null,
     },
   };
 }

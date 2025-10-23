@@ -99,7 +99,8 @@ export default function StepRenderer({
 
     case 'opt-in':
       return (
-        <div className="flex flex-col gap-8 bg-brand-2 p-12 rounded-3xl">
+        <>
+        <div className="flex flex-col bg-brand-2 p-12 rounded-3xl">
           <div>
             <p className="ft-4 sans font-bold" dangerouslySetInnerHTML={{ __html: step.title }} />
             {step.description && (
@@ -117,12 +118,13 @@ export default function StepRenderer({
               <p className="-ft-2 text-brand-3 font-medium">{errors[field.name]?.message}</p>
             </div>
           ))}
-          <div className="mt-4">
-            <p className="-ft-3 text-center text-brand-1">Tus datos no serán compartidos, al continuar aceptas nuestra&nbsp;
-              <Link href={info.privacyNotice}>política de privacidad</Link>
-            </p>
-          </div>
         </div>
+        <div className="mt-4">
+          <p className="-ft-3 text-center text-brand-1">Tus datos no serán compartidos, al continuar aceptas nuestra&nbsp;
+            <Link href={info.privacyNotice}>política de privacidad</Link>
+          </p>
+        </div>
+        </>
       );
 
     case 'checkpoint':

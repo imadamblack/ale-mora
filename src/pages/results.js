@@ -1,26 +1,14 @@
 import { getCookie } from 'cookies-next';
 import Image from 'next/image';
-import { Select } from '../components/form/formAtoms';
-import { FormProvider, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import Blockbuster from '../components/blockbuster';
 import i00 from '../../public/results/00.jpg';
 import iTestimonios from '../../public/survey/03.jpg';
 import iBeneficios from '../../public/survey/02.jpg';
 import iFaqs from '../../public/survey/05.jpg';
-import { info } from '../../info';
-import { useState } from 'react';
 import Faqs from '../components/faqs';
 
 export default function Results({lead}) {
-  const [tienda, setTienda] = useState('');
-  const methods = useForm({mode: 'all'});
-  const {
-    register,
-    handleSubmit,
-    formState: {errors},
-    watch,
-  } = methods;
-
   const {fullName} = lead;
   const firstName = fullName.split(' ')[0];
 
@@ -35,10 +23,10 @@ export default function Results({lead}) {
       <div
         className="relative container !px-0 md:pb-0 flex flex-col flex-grow md:flex-grow-0 items-center pointer-events-auto touch-auto">
         <div className="survey-card border-b pb-12">
-          <div className="w-full py-12 space-y-12">
-            <h1><span className="font-semibold">{firstName ?? "Hey"}</span>, tu sonrisa merece un plan hecho para ti
+          <div className="flex flex-col w-full py-12">
+            <h1><span className="font-semibold">{firstName ?? 'Hey'}</span>, tu sonrisa merece un plan hecho para ti
             </h1>
-            <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden">
+            <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden mb-12">
               <Image src={i00} layout="fill" objectFit="cover"/>
             </div>
             <p className="ft-2">Hola, soy Ale Mora, cirujana dentista con
@@ -48,7 +36,20 @@ export default function Results({lead}) {
               a que cada persona se sienta cómoda y
               feliz con su sonrisa.</p>
           </div>
-
+          <hr/>
+          <div className="py-12">
+            <h2 className="font-semibold">Agenda tu estudio clínico en una sola visita:</h2>
+            <p className="ft-2">
+              <br/>- radiografías
+              <br/>- Escaneo digital
+              <br/>- Interconsulta con especialistas
+              <br/>- Diagnóstico apoyado por IA
+              <br/>- Limpieza
+              <br/><br/>Recibe tu plan de tratamiento, ruta clínica y cotización el mismo día.
+            </p>
+            <p className="ft-4 font-bold">Agenda tu consulta integral <br/>$2,000 MXN</p>
+            <span className="-ft-1">Pagas hasta el día de tu consulta.</span>
+          </div>
 
           <SectionCTA/>
 
@@ -108,7 +109,7 @@ export default function Results({lead}) {
       />
 
       <section className="container my-20">
-        <Faqs />
+        <Faqs/>
         <SectionCTA/>
       </section>
 
