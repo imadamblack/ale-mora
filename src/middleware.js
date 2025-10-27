@@ -8,10 +8,11 @@ export function middleware(req) {
   let utm = {}
 
   if (url.searchParams.get('fbclid')) {
-    res.cookies.set('_fbc', url.searchParams.get('fbclid'), {
-      path: '/',
-      maxAge: 60 * 60 * 24 * 7,
-    })
+    res.cookies.set(
+      '_fbc',
+      `fb.1.${Date.now()}.${url.searchParams.get('fbclid')}`,
+      {path: '/', maxAge: 60 * 60 * 24 * 7,}
+    )
   }
 
   utmParams.forEach(param => {
