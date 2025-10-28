@@ -100,30 +100,39 @@ export default function StepRenderer({
     case 'opt-in':
       return (
         <>
-        <div className="flex flex-col bg-brand-2 p-12 rounded-3xl">
-          <div>
-            <p className="ft-4 sans font-bold" dangerouslySetInnerHTML={{ __html: step.title }} />
-            {step.description && (
-              <p className="ft-2 mt-4" dangerouslySetInnerHTML={{ __html: step.description }} />
-            )}
-          </div>
-          {step.fields.map((field, idx) => (
-            <div key={field.name}>
-              <input
-                type={field.type}
-                {...register(field.name, field.inputOptions)}
-                placeholder={field.title}
-                className={errors[field.name]?.message ? '!border-brand-2' : ''}
-              />
-              <p className="-ft-2 text-brand-3 font-medium">{errors[field.name]?.message}</p>
+          <div className="flex flex-col bg-blue-100 p-12 rounded-3xl gap-4">
+            <div>
+              <p className="ft-4 sans font-bold" dangerouslySetInnerHTML={{__html: step.title}}/>
+              {step.description && (
+                <p className="ft-2 mt-4" dangerouslySetInnerHTML={{__html: step.description}}/>
+              )}
             </div>
-          ))}
-        </div>
-        <div className="mt-4">
-          <p className="-ft-3 text-center text-brand-1">Tus datos no serán compartidos, al continuar aceptas nuestra&nbsp;
-            <Link href={info.privacyNotice}>política de privacidad</Link>
-          </p>
-        </div>
+
+            {step.fields.map((field, idx) => (
+              <div key={field.name}>
+                <input
+                  type={field.type}
+                  {...register(field.name, field.inputOptions)}
+                  placeholder={field.title}
+                  className={errors[field.name]?.message ? '!border-brand-2' : ''}
+                />
+                <p className="-ft-2 text-brand-3 font-medium">{errors[field.name]?.message}</p>
+              </div>
+            ))}
+
+            <div>
+              {step.footer && (
+                <p className="ft-2" dangerouslySetInnerHTML={{__html: step.footer}}/>
+              )}
+            </div>
+
+          </div>
+          <div className="mt-4">
+            <p className="-ft-3 text-center text-brand-1">Tus datos no serán compartidos, al continuar aceptas
+              nuestra&nbsp;
+              <Link href={info.privacyNotice}>política de privacidad</Link>
+            </p>
+          </div>
         </>
       );
 
