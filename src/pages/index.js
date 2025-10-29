@@ -7,6 +7,7 @@ import StepRenderer from '../components/form/stepRenderer';
 import fbEvent from '../services/fbEvents';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
+import { info } from '../../info';
 
 import logo from '../../public/logo.svg';
 import i02 from '../../public/survey/02.jpg';
@@ -393,8 +394,7 @@ export default function Survey({lead, utm}) {
 
       const payload = {...lead, ...data, ...utm};
 
-      const url = '';
-      // const url = info.surveyWebhook;
+      const url = info.surveyWebhook;
 
       const res = await fetch(url, {
         method: 'POST',
