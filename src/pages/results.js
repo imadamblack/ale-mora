@@ -1,6 +1,5 @@
 import { getCookie } from 'cookies-next';
 import Image from 'next/image';
-import { useForm } from 'react-hook-form';
 import Blockbuster from '../components/blockbuster';
 import i00 from '../../public/results/00.jpg';
 import iTestimonios from '../../public/survey/03.jpg';

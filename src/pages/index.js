@@ -13,6 +13,7 @@ import logo from '../../public/logo.svg';
 import i02 from '../../public/survey/02.jpg';
 import i03 from '../../public/survey/03.jpg';
 import i04 from '../../public/survey/04.jpg';
+import i00 from '../../public/results/00.jpg';
 
 const Intro = () => <motion.div
   key="intro"
@@ -50,6 +51,32 @@ const Intro = () => <motion.div
 </motion.div>;
 
 const setFormSteps = ({fullName, phone}) => ([
+  {
+    type: 'checkpoint',
+    name: 'checkpoint-0',
+    autoAdvance: false,
+    render: () => (
+      <div className="flex flex-col w-full">
+        <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden mb-12">
+          <Image src={i00} layout="fill" objectFit="cover"/>
+        </div>
+        <p className="ft-2 mb-8">Hola, soy Ale Mora, en AM Dental Studio nos apasiona ayudar
+          a que cada persona se sienta cómoda y feliz con su sonrisa.
+          <br/><br/>
+          Estamos ubicados en Plaza Universidad, frente a la UAG.
+        </p>
+        <div className="relative w-full aspect-square rounded-2xl overflow-hidden">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3732.4788525370723!2d-103.41654782475256!3d20.690770880875366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428af35339da2bf%3A0xd707b3ddf7415727!2sAM%20Dental%20Studio%20%7C%20Ortodoncia%20y%20Est%C3%A9tica%20Dental%20Especializada%20en%20Zapopan!5e0!3m2!1sen!2smx!4v1762294936991!5m2!1sen!2smx"
+            style={{position: 'absolute', inset: 0, border: 0, width: '100%', height: '100%'}}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </div>
+      </div>
+    )
+  },
   {
     type: 'radio',
     name: 'sensacion',
