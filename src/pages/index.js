@@ -318,7 +318,7 @@ const setFormSteps = ({fullName, phone}) => ([
     type: 'opt-in',
     title: 'Ok! Estamos listos para agendar tu consulta + limpieza',
     description: 'Regálanos unos datos para programar tu cita',
-    footer: '<hr class="mb-8"/><span class="font-semibold">Tu consulta incluye:</span> <br/>- radiografías <br/>- escaneo digital <br/>- interconsulta con especialistas <br/>- diagnóstico apoyado por IA<br/>- limpieza <br/>- tu plan de tratamiento y ruta clínica.<br/><b>Costo de consulta + limpieza: $2,000</b><br/><span class="-ft-1">Pagas hasta el día de tu consulta.</span>',
+    footer: '<hr class="mb-8"/><span class="font-semibold">Tu consulta incluye:</span> <br/>- radiografías <br/>- escaneo digital <br/>- interconsulta con especialistas <br/>- diagnóstico apoyado por IA<br/>- limpieza <br/>- tu plan de tratamiento y ruta clínica.<br/><b>Costo de consulta + limpieza: $1,000</b><br/><span class="-ft-1">Pagas hasta el día de tu consulta.</span>',
     fields: [
       {
         type: 'text',
