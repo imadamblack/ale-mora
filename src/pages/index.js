@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { setCookie } from 'cookies-next';
 import StepRenderer from '../components/form/stepRenderer';
-import fbEvent from '../services/fbEvents';
+import fbEvent, { gtagSendEvent } from '../services/fbEvents';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { info } from '../../info';
@@ -435,6 +435,8 @@ export default function Survey({lead, utm}) {
         'Lead',
         {phone: data.phone, externalID: res.id},
       );
+
+      gtagSendEvent('7gKvCMabtM4bELzrp8A9', {fullName: data.fullName, phone: data.whatsapp});
 
       setCookie('lead', {...data, id: res.id});
 

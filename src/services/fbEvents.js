@@ -42,3 +42,25 @@ export default function fbEvent(
     },
   }).then(res => res.json()).catch(err => console.log(err));
 }
+
+export function gtagSendEvent(conversionId, data = {}) {
+  const fullName = data.fullName ?? '';
+  const phone = data.phone ?? '';
+  const [firstName = '', lastName = ''] = fullName.split(' ');
+
+  gtag('set', 'user_data', {
+    phone_number: phone.trim(),
+    address: {
+      first_name: firstName.trim(),
+      last_name: lastName.trim(),
+    },
+  });
+
+  gtag('event', 'conversion', {
+    send_to: `AW-16509433276/${conversionId}`,
+    event_callback: () => {},
+  });
+
+
+  return false;
+}
