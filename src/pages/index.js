@@ -534,7 +534,7 @@ export default function Survey({lead, utm}) {
 }
 
 export async function getServerSideProps(ctx) {
-  const {req} = ctx;
+  const { req, query } = ctx;
   const cookiesHeader = req.headers.cookie || '';
 
   const keys = ['utm', '_fbc', '_fbp', 'lead'];
@@ -556,7 +556,19 @@ export async function getServerSideProps(ctx) {
     }
   }
 
-  const {lead, utm} = cookies;
+  // --- Revisar params UTM del query ---
+  const utmFromQuery = {};
+  ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(param => {
+    if (query[param]) utmFromQuery[param] = query[param];
+  });
+
+  // Si hay params en la URL, se usan; si no, cae en cookie
+  const utm =
+    Object.keys(utmFromQuery).length > 0
+      ? utmFromQuery
+      : cookies.utm ?? null;
+
+  const { lead } = cookies;
 
   return {
     props: {
@@ -566,7 +578,7 @@ export async function getServerSideProps(ctx) {
         whatsapp: lead?.whatsapp ?? '',
         sheetRow: lead?.sheetRow ?? '',
       },
-      utm: utm ?? null,
+      utm,
     },
   };
 }
