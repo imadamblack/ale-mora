@@ -21,12 +21,12 @@ const Intro = ({callback}) => <motion.div
   animate={{opacity: 1}}
   exit={{opacity: 0}}
   transition={{duration: 0.5}}
-  className="bg-[url('/survey/00.jpg')] bg-center bg-cover relative flex-grow flex flex-col items-center justify-between px-4 py-12"
+  className="bg-neutral-50 bg-center bg-cover relative flex-grow flex flex-col items-center justify-between px-4 pb-12"
 >
   <div className="relative w-full max-w-[60rem] flex items-center justify-center gap-8 space-y-4">
-    <div className="inset-x-0 w-1/5 aspect-square brightness-200 bg-black rounded-full flex items-center p-6 md:p-12">
+    <div className="inset-x-0 w-1/5 aspect-square brightness-200 rounded-full flex items-center p-6 md:p-12">
       <div className="relative w-full aspect-square">
-        <Image src="/logo-am.webp" layout="fill" className="object-contain"/>
+        <Image src="/logo-am.webp" layout="fill" className="object-contain invert"/>
       </div>
     </div>
     <div className="-ft-1 w-4/5 text-white space-x-4 border py-4 px-6 rounded-lg bg-brand-1">
@@ -34,16 +34,21 @@ const Intro = ({callback}) => <motion.div
     </div>
   </div>
 
-  <div className="absolute bg-gradient-to-t from-brand-1 to-transparent bottom-0 h-[70dvh] w-full "/>
+  <div className="relative w-full max-w-[60rem] aspect-[4/3] rounded-2xl overflow-hidden">
+    <Image src="/survey/intro.jpg" layout="fill" objectFit="cover" objectPosition="center"/>
+  </div>
 
-  <div className="container flex flex-col justify-center items-center z-10">
-    <h1 className="ft-9 text-white font-semibold my-8 text-center [text-shadow:_2px_2px_0_rgb(0_0_0_/_40%)]">
+  <div className="absolute bg-gradient-to-t from-brand-1/20 to-transparent bottom-0 h-[70dvh] w-full "/>
+
+  <div className="container mt-8  flex flex-col justify-center items-center z-10">
+    <p className="ft-2 font-medium text-brand-1">Clínica Dental en Zapopan</p>
+    <h1 className="ft-8 text-brand-1 font-semibold mb-8 text-center">
       La sonrisa que sueñas está más
       cerca de lo que imaginas
     </h1>
-    <p className="ft-2 font-medium text-white text-center">En Plaza Universidad, frente a la UAG</p>
-    <p className="ft-2 font-medium text-white text-center">20 años de experiencia</p>
-    <p className="ft-2 font-medium text-white text-center">Tratamiento 100% personalizado</p>
+    <p className="ft-1 font-medium text-brand-1 text-center">En Plaza Universidad, frente a la UAG</p>
+    <p className="ft-1 font-medium text-brand-1 text-center">20 años de experiencia</p>
+    <p className="ft-1 font-medium text-brand-1 text-center">Tratamiento 100% personalizado</p>
 
     <div className="w-full max-w-[60rem] mt-8 space-y-8">
       <a
