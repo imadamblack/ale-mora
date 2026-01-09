@@ -6,6 +6,8 @@ import iTestimonios from '../../public/survey/03.jpg';
 import iBeneficios from '../../public/survey/02.jpg';
 import iFaqs from '../../public/survey/05.jpg';
 import Faqs from '../components/faqs';
+import fbEvent, { gtagSendEvent } from '../services/fbEvents';
+import { info } from '../../info';
 
 export default function Results({lead}) {
   const {fullName} = lead;
@@ -14,7 +16,13 @@ export default function Results({lead}) {
   const SectionCTA = () => <div className="w-full space-y-4">
     <hr className="mb-8"/>
     <p className="ft-4 text-center font-semibold">Tienes alguna pregunta?</p>
-    <a href="" target="_blank" className="button !w-full">Mándanos un WhatsApp</a>
+    <a
+      href={`https://wa.me/${info.whatsapp.value}?text=${info.whatsapp.message}`}
+      onClick={() => {fbEvent('Contact'); gtagSendEvent('13KmCIOZ_8QZELzrp8A9')}}
+      target="_blank"
+      className="button !w-full">
+      Mándanos un WhatsApp
+    </a>
   </div>;
 
   return (
@@ -124,21 +132,21 @@ export async function getServerSideProps(ctx) {
 
   const lead = JSON.parse(leadCookie);
 
-  if (!lead || lead === 'null' || Object.keys(lead).length === 0) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: '/',
-      },
-    };
-  }
+  // if (!lead || lead === 'null' || Object.keys(lead).length === 0) {
+  //   return {
+  //     redirect: {
+  //       permanent: false,
+  //       destination: '/',
+  //     },
+  //   };
+  // }
 
   return {
     props: {
       lead: {
-        fullName: lead.fullName,
-        phone: lead.phone,
-        whatsapp: lead.whatsapp,
+        fullName: lead.fullName || 'Hey',
+        phone: lead.phone || '',
+        whatsapp: lead.whatsapp || '',
         sheetRow: lead.sheetRow || '',
         _fbc,
         _fbp,

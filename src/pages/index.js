@@ -15,38 +15,49 @@ import i03 from '../../public/survey/03.jpg';
 import i04 from '../../public/survey/04.jpg';
 import i00 from '../../public/results/00.jpg';
 
-const Intro = () => <motion.div
+const Intro = ({callback}) => <motion.div
   key="intro"
   initial={{opacity: 0}}
   animate={{opacity: 1}}
   exit={{opacity: 0}}
   transition={{duration: 0.5}}
-  className="bg-[url('/survey/00.jpg')] bg-center bg-cover relative flex-grow flex flex-col items-center justify-end px-4 py-12"
+  className="bg-[url('/survey/00.jpg')] bg-center bg-cover relative flex-grow flex flex-col items-center justify-between px-4 py-12"
 >
-  <div className="absolute mx-auto inset-x-0 w-[32rem] h-[10rem] top-[4rem] brightness-200">
-    <Image src={logo} layout="fill" className="object-contain"/>
+  <div className="relative w-full max-w-[60rem] flex items-center justify-center gap-8 space-y-4">
+    <div className="inset-x-0 w-1/5 aspect-square brightness-200 bg-black rounded-full flex items-center p-6 md:p-12">
+      <div className="relative w-full aspect-square">
+        <Image src="/logo-am.webp" layout="fill" className="object-contain"/>
+      </div>
+    </div>
+    <div className="-ft-1 w-4/5 text-white space-x-4 border py-4 px-6 rounded-lg bg-brand-1">
+      <span>4.9</span><span>⭐️⭐️⭐️⭐️⭐️</span><nobr>124 Reseñas en Google</nobr>
+    </div>
   </div>
 
-  <div className="absolute bg-gradient-to-t from-brand-1 to-transparent bottom-0 h-[60dvh] w-full "/>
+  <div className="absolute bg-gradient-to-t from-brand-1 to-transparent bottom-0 h-[70dvh] w-full "/>
 
   <div className="container flex flex-col justify-center items-center z-10">
-    <h1 className="ft-11 text-white font-semibold my-12 text-center">La sonrisa que sueñas está más
-      cerca de lo que imaginas</h1>
-    <p className="ft-4 font-medium text-white text-center">Sencillo, sin dolor y sin tratamientos innecesarios</p>
+    <h1 className="ft-9 text-white font-semibold my-8 text-center [text-shadow:_2px_2px_0_rgb(0_0_0_/_40%)]">
+      La sonrisa que sueñas está más
+      cerca de lo que imaginas
+    </h1>
+    <p className="ft-2 font-medium text-white text-center">En Plaza Universidad, frente a la UAG</p>
+    <p className="ft-2 font-medium text-white text-center">20 años de experiencia</p>
+    <p className="ft-2 font-medium text-white text-center">Tratamiento 100% personalizado</p>
 
-    <div className="w-full max-w-[50rem] h-12 p-2 mt-16 mb-4 bg-gray-200 rounded-full overflow-hidden">
-      <motion.div
-        initial={{width: '0%'}}
-        animate={{width: '100%'}}
-        transition={{duration: 3, ease: 'easeInOut'}}
-        className="h-full bg-gradient-to-br from-blue-800 to-indigo-500 rounded-2xl"
-      />
+    <div className="w-full max-w-[60rem] mt-8 space-y-8">
+      <a
+        href={`https://wa.me/${info.whatsapp.value}?text=${info.whatsapp.message}`}
+        onClick={() => {fbEvent('Contact'); gtagSendEvent('13KmCIOZ_8QZELzrp8A9')}}
+        target="_blank"
+        className="button !w-full !max-w-[60rem]"
+      >
+        Agenda tu cita por WhatsApp
+      </a>
+      <button
+        onClick={callback}
+        className="button-secondary !w-full">Haz tu test de diagnóstico</button>
     </div>
-    <p className="-ft-1 flex items-center text-center text-gray-100">
-      Cargando el test
-      <span
-        className="-ft-1 material-symbols-outlined animate-spin ml-4">progress_activity</span>
-    </p>
   </div>
 </motion.div>;
 
@@ -65,7 +76,7 @@ const setFormSteps = ({fullName, phone}) => ([
           <br/><br/>
           Estamos ubicados en Plaza Universidad, frente a la UAG.
         </p>
-        <div className="relative w-full aspect-square rounded-2xl overflow-hidden">
+        <div className="relative w-full aspect-square rounded-2xl overflow-hidden mb-8">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3732.4788525370723!2d-103.41654782475256!3d20.690770880875366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428af35339da2bf%3A0xd707b3ddf7415727!2sAM%20Dental%20Studio%20%7C%20Ortodoncia%20y%20Est%C3%A9tica%20Dental%20Especializada%20en%20Zapopan!5e0!3m2!1sen!2smx!4v1762294936991!5m2!1sen!2smx"
             style={{position: 'absolute', inset: 0, border: 0, width: '100%', height: '100%'}}
@@ -74,6 +85,14 @@ const setFormSteps = ({fullName, phone}) => ([
             referrerPolicy="no-referrer-when-downgrade"
           />
         </div>
+        <a
+          href={`https://wa.me/${info.whatsapp.value}`}
+          onClick={() => {fbEvent('Contact'); gtagSendEvent('13KmCIOZ_8QZELzrp8A9')}}
+          target="_blank"
+          className="button !w-full !max-w-[60rem]"
+        >
+          Agenda tu cita por WhatsApp
+        </a>
       </div>
     )
   },
@@ -357,16 +376,16 @@ export default function Survey({lead, utm}) {
   } = methods;
   const router = useRouter();
 
-  useEffect(() => {
-    if (showIntro) {
-      const timer = setTimeout(() => {
-        setShowIntro(false);
-      }, 3000);
-
-      return () => clearTimeout(timer);
-    }
-    window.scrollTo(0, 0);
-  }, [showIntro]);
+  // useEffect(() => {
+  //   if (showIntro) {
+  //     const timer = setTimeout(() => {
+  //       setShowIntro(false);
+  //     }, 3000);
+  //
+  //     return () => clearTimeout(timer);
+  //   }
+  //   window.scrollTo(0, 0);
+  // }, [showIntro]);
 
   useEffect(() => {
     const current = formSteps[formStep];
@@ -454,7 +473,7 @@ export default function Survey({lead, utm}) {
       <div className="relative flex flex-col flex-grow bg-gradient-to-t from-blue-50 to-white">
         <AnimatePresence mode="wait">
           {showIntro && (
-            <Intro/>
+            <Intro callback={() => setShowIntro(false)}/>
           )}
           {!showIntro && !showOutro && (
             <motion.div

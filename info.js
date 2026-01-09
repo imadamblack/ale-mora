@@ -9,8 +9,8 @@ export const info = {
   },
   phoneNumber: '+',
   whatsapp: {
-    value: '+',
-    message: 'Buen día, me interesa un diseño de sonrisa!',
+    value: '+523321847150',
+    message: 'Buen día, quiero agendar una cita',
   },
   social: {
     facebook: '',

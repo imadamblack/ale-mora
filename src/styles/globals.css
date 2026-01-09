@@ -411,7 +411,7 @@ button, .button, button[type], .button[type], button-secondary[type], [type].but
   hover:bg-brand-1 hover:text-white;
 }
 button-secondary, .button-secondary {
-  @apply bg-transparent border border-brand-1 text-inherit hover:bg-transparent hover:text-brand-1;
+  @apply bg-transparent border border-white text-white hover:bg-transparent hover:text-white;
 }
 .text-block {
   @apply xl:w-1/2;
